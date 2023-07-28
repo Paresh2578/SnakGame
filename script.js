@@ -1,32 +1,32 @@
 //snak speed
- let snakSpeed = 40;
- let seepdIncessCount = 5;
+let snakSpeed = 40;
+let seepdIncessCount = 5;
 
- //song play and push
- let backgroundSong_count = 0;
- let backgroundSong = new Audio('song/backgroundSong.mp3');
+//song play and push
+let backgroundSong_count = 0;
+let backgroundSong = new Audio('song/backgroundSong.mp3');
 const background_SongPlay = ()=>{
-    backgroundSong.play();
+   backgroundSong.play();
 }
 const background_SongPause =()=>{
-    backgroundSong.pause();
+   backgroundSong.pause();
 }
 
 let eatSong =new Audio ('song/eatSong.mp3');
 const eatSong_play = ()=>{
-     eatSong.play();
+    eatSong.play();
 }
 
 let lifeDicressSong = new Audio('song/lifeDicressSong.mp3');
 const lifeDicressSong_play = ()=>{
-    lifeDicressSong.play();
+   lifeDicressSong.play();
 }
 
 let GameOverSong = new Audio('song/GameOver.mp3')
 const GameOverSong_play = ()=>{
-    GameOverSong.play();
+   GameOverSong.play();
 }
-  
+ 
 
 //scrore bord
 let currScoreID = document.getElementById('currScor');
@@ -34,19 +34,19 @@ let heigthScror = document.getElementById('heigthScror');
 
 //inistiol heigh score
 let localStorage_Chack_HeigthScore = localStorage.getItem('heighScore');
-  
-     if(localStorage_Chack_HeigthScore){
-        heigthScror.innerHTML = localStorage_Chack_HeigthScore;
-     }else{
-        heigthScror.innerHTML = 0
-     }
-   
  
- let currScor = 0;
+    if(localStorage_Chack_HeigthScore){
+       heigthScror.innerHTML = localStorage_Chack_HeigthScore;
+    }else{
+       heigthScror.innerHTML = 0
+    }
+  
 
- //life time
- let lifeTimeID = document.getElementById('lifeTime');
- let lifeTime = 5;
+let currScor = 0;
+
+//life time
+let lifeTimeID = document.getElementById('lifeTime');
+let lifeTime = 5;
 
 
 //variable
@@ -64,176 +64,243 @@ let TopInterVal = 0;
 let BottomInterVal = 0;
 
 const startRigth = ()=>{
-    //clear interval
-        clearInterval(rigthInterVal);
-        clearInterval(LeftInterVal);
-        clearInterval(BottomInterVal);
-        clearInterval(TopInterVal)
-
-        //UPDATE heigth score
-        let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
-        localStorage.setItem('heighScore', heightScore)
+   //clrear all interval and upadete heigth score
+   cleare_intervel_heigth_score(currScor);
 
 
-    //change imgs
-    snak.src = "imgs/SnakR.png"
+   //change imgs
+   snak.src = "imgs/SnakR.png"
 
-    rigthInterVal =  setInterval(moveRigth , snakSpeed);
+   //upadete snak speed
+   setInterval(()=>{
+    incres_snak_speed()
+} , 1);
 
-    //background song play
-    if(backgroundSong_count == 0){
-        background_SongPlay();
-        backgroundSong_count++;
-    }
-    
+   rigthInterVal =  setInterval(moveRigth , snakSpeed);
+
+   //background song play
+   if(backgroundSong_count == 0){
+       background_SongPlay();
+       backgroundSong_count++;
+   }
+   
 }
 const startLeft = ()=>{
-    //clear interval
-        clearInterval(rigthInterVal);
-        clearInterval(LeftInterVal);
-        clearInterval(BottomInterVal);
-        clearInterval(TopInterVal)
+   //clrear all interval and upadete heigth score
+   cleare_intervel_heigth_score(currScor);
 
-        //UPDATE heigth score
-        let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
-        localStorage.setItem('heighScore', heightScore)
-
-
-    //change imgs
-    snak.src = "imgs/SnakL.png"
-
-     //upadete snak speed
-     setInterval(()=>{
-        if(snakSpeed == 0){
-            snakSpeed = 5;
-           }else{
-               if(seepdIncessCount == 0){
-                   snakSpeed -= 10;
-                   seepdIncessCount = 5;
-               }
-           }
-    } , 1);
-
-    LeftInterVal =  setInterval(moveLeft , snakSpeed);
-
-     //background song play
-     if(backgroundSong_count == 0){
-        background_SongPlay();
-        backgroundSong_count++;
-    }
-}
-const startTop = ()=>{
-    //clear interval
-        clearInterval(rigthInterVal);
-        clearInterval(LeftInterVal);
-        clearInterval(BottomInterVal);
-        clearInterval(TopInterVal)
-
-        //UPDATE heigth score
-        let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
-        localStorage.setItem('heighScore', heightScore)
-
-
-    //change imgs
-    snak.src = "imgs/SnakT.png"
-
-    setInterval(()=>{
-        if(snakSpeed == 0){
-            snakSpeed = 5;
-           }else{
-               if(seepdIncessCount == 0){
-                   snakSpeed -= 10;
-                   seepdIncessCount = 5;
-               }
-           }
-    } , 1);
-
-    TopInterVal = setInterval(moveTop , snakSpeed);
-
-     //background song play
-     if(backgroundSong_count == 0){
-        background_SongPlay();
-        backgroundSong_count++;
-    }
-}
-const startBottom = ()=>{
-    //clear interval
-        clearInterval(rigthInterVal);
-        clearInterval(LeftInterVal);
-        clearInterval(BottomInterVal);
-        clearInterval(TopInterVal)
-
-        //UPDATE heigth score
-        let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
-        localStorage.setItem('heighScore', heightScore)
-
-
-    //change imgs
-    snak.src = "imgs/SnakB.png"
+   //change imgs
+   snak.src = "imgs/SnakL.png"
 
     //upadete snak speed
     setInterval(()=>{
-        if(snakSpeed == 15){
-            snakSpeed = 15;
-           }else{
-               if(seepdIncessCount == 0){
-                   snakSpeed -= 10;
-                   seepdIncessCount = 5;
-               }
-           }
-    } , 1);
+      incres_snak_speed();
+   } , 1);
 
-    BottomInterVal = setInterval(moveBottom , snakSpeed);
+   LeftInterVal =  setInterval(moveLeft , snakSpeed);
 
-     //background song play
-     if(backgroundSong_count == 0){
-        background_SongPlay();
-        backgroundSong_count++;
-    }
+    //background song play
+    if(backgroundSong_count == 0){
+       background_SongPlay();
+       backgroundSong_count++;
+   }
+}
+const startTop = ()=>{
+   //clrear all interval and upadete heigth score
+   cleare_intervel_heigth_score(currScor);
+
+
+   //change imgs
+   snak.src = "imgs/SnakT.png"
+
+   setInterval(()=>{
+       incres_snak_speed();
+   } , 1);
+
+   TopInterVal = setInterval(moveTop , snakSpeed);
+
+    //background song play
+    if(backgroundSong_count == 0){
+       background_SongPlay();
+       backgroundSong_count++;
+   }
+}
+const startBottom = ()=>{
+   //clrear all interval and upadete heigth score
+   cleare_intervel_heigth_score(currScor);
+
+
+   //change imgs
+   snak.src = "imgs/SnakB.png"
+
+   //upadete snak speed
+   setInterval(()=>{
+       incres_snak_speed()
+   } , 1);
+
+   BottomInterVal = setInterval(moveBottom , snakSpeed);
+
+    //background song play
+    if(backgroundSong_count == 0){
+       background_SongPlay();
+       backgroundSong_count++;
+   }
 }
 
 const moveRigth = ()=>{
-    SnakLeftPosition += 10;
-    snak.style.left = SnakLeftPosition+'px';
+   SnakLeftPosition += 10;
+   snak.style.left = SnakLeftPosition+'px';
+
+   let ansLeft = appleLeft - SnakLeftPosition;
+   let ansTop = appleTop - SnakTopPosition;
+   if(ansLeft<= 20 && ansLeft>= -20 && ansTop <=20 && ansTop >= -20){
+       score_incress();
+   }
+
+   if(SnakLeftPosition == 890){
+       SnakLeftPosition = 100;
+       
+      decress_life_time();
+   }
+    //check game over
+     check_game_over(currScor)
+
+}
+
+const moveLeft = ()=>{
+   SnakLeftPosition -= 10;
+   snak.style.left = SnakLeftPosition+'px';
+
+   //eat apple
+   let ansLeft = appleLeft - SnakLeftPosition;
+   let ansTop = appleTop - SnakTopPosition;
+   if(ansLeft<= 20 && ansLeft>= -20 && ansTop <=20 && ansTop >= -20){
+       score_incress();
+   }
+
+   
+   if(SnakLeftPosition < 100 ){
+       SnakLeftPosition = 890;
+      decress_life_time();
+   }
+
+   //check game over
+      check_game_over(currScor)
+}
+
+const moveBottom = ()=>{
+   SnakTopPosition += 10;
+   snak.style.top = SnakTopPosition+'px';
+
+   let ansLeft = appleLeft - SnakLeftPosition;
+   let ansTop = appleTop - SnakTopPosition;
+   if(ansLeft<= 20 && ansLeft>= -20 && ansTop <=20 && ansTop >= -20){
+       score_incress();
+   }
+   
+   if(SnakTopPosition == 550){
+       SnakTopPosition = 70;
+      decress_life_time();
+   }
+
+    //check game over
+    check_game_over(currScor)
+  
+}
+
+const moveTop = ()=>{
+   SnakTopPosition -= 10;
+   snak.style.top = SnakTopPosition+'px';
+
+   let ansLeft = appleLeft - SnakLeftPosition;
+   let ansTop = appleTop - SnakTopPosition;
+   if(ansLeft<= 20 && ansLeft>= -20 && ansTop <=20 && ansTop >= -20){
+       score_incress()
+   }
+
+   if(SnakTopPosition < 70 ){
+       SnakTopPosition = 550;
+      decress_life_time();
+   }
+    //check game over
+   check_game_over(currScor)
+}
 
 
-    let ansLeft = appleLeft - SnakLeftPosition;
-    let ansTop = appleTop - SnakTopPosition;
-    if(ansLeft<= 20 && ansLeft>= -20 && ansTop <=20 && ansTop >= -20){
-        ApplePositon();
-        currScor++;
-        currScoreID.innerHTML =currScor;
-        seepdIncessCount --;
 
-        //eat song play
-        eatSong_play();
-    }
+//apple postion
+let appleposition = 0;
+let appleLeft = 500;
+let appleTop = 600;
 
-    if(SnakLeftPosition == 890){
-        SnakLeftPosition = 100;
-        
-        lifeTime--;
-        if(lifeTime <= 3){
-            lifeTimeID.style.color ='red';
-        }
-        lifeTimeID.innerHTML = lifeTime
+const ApplePositon = ()=>{
+    appleLeft = Math.ceil(Math.random()*790);
+    appleTop = Math.ceil(Math.random()*490);
 
-        //lifeDicressSong_play
-        lifeDicressSong_play();
-    }
-     //check game over
-     if(lifeTime == 0){
+    console.log(appleTop)
+
+
+   if(appleLeft < 120  || appleLeft > 895){
+       appleLeft = 150;
+   }
+
+   if(appleTop < 75 || appleTop > 525){
+       appleTop = 95
+   }
+
+
+   apple.style.left = appleLeft+"px";
+   apple.style.top = appleTop+"px";
+}
+
+//handle keyparess
+document.addEventListener('keydown' , (event)=>{
+   console.log(event.key)
+   if(event.key == "ArrowDown"){
+       startBottom();
+   }
+   if(event.key == "ArrowRight"){
+       startRigth();
+   }
+   if(event.key == "ArrowUp"){
+       startTop();
+   }
+   if(event.key == "ArrowLeft"){
+       startLeft();
+   }
+   if(event.key == "Enter"){
+       clearInterval(rigthInterVal);
+       clearInterval(LeftInterVal);
+       clearInterval(BottomInterVal);
+       clearInterval(TopInterVal)
+
+       //UPDATE heigth score
+       let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
+       localStorage.setItem('heighScore', heightScore)
+
+      //background song push
+       background_SongPause();
+       backgroundSong_count = 0;
+       
+   }
+
+})
+
+
+//game over
+ const check_game_over = (currScor) =>{
+    if(lifeTime == 0){
         console.log("game over")
         //clear interval
         clearInterval(rigthInterVal);
         clearInterval(LeftInterVal);
         clearInterval(BottomInterVal);
         clearInterval(TopInterVal)
-
+ 
         //UPDATE heigth score
         let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
         localStorage.setItem('heighScore', heightScore)
-
+ 
         
         //alrt box
         Swal.fire({
@@ -249,269 +316,53 @@ const moveRigth = ()=>{
             //gameOver Songs
             GameOverSong_play();
             background_SongPause();
-
+ 
     }
+ }
 
-    //update snak speed
-    if(currScor == currScor+10){
-        snakSpeed -= 10;
-      }
+ //score incress 
+ const score_incress = ()=>{
+    ApplePositon();
+    currScor++;
+    currScoreID.innerHTML =currScor;
+    seepdIncessCount --;
 
-}
-const moveLeft = ()=>{
-    SnakLeftPosition -= 10;
-    snak.style.left = SnakLeftPosition+'px';
-
-    //eat apple
-    let ansLeft = appleLeft - SnakLeftPosition;
-    let ansTop = appleTop - SnakTopPosition;
-    if(ansLeft<= 20 && ansLeft>= -20 && ansTop <=20 && ansTop >= -20){
-        ApplePositon();
-        currScor++;
-        currScoreID.innerHTML =currScor;
-        seepdIncessCount --;
-
-        //eat song play
-        eatSong_play();
+ }
+ //dicress life time
+ const decress_life_time = ()=>{
+    lifeTime--;
+    if(lifeTime <= 3){
+        lifeTimeID.style.color ='red';
     }
+    lifeTimeID.innerHTML = lifeTime
 
-    
-    if(SnakLeftPosition < 100 ){
-        SnakLeftPosition = 890;
-        lifeTime--;
-        if(lifeTime <= 3){
-            lifeTimeID.style.color ='red';
-        }
-        lifeTimeID.innerHTML = lifeTime
-
-        //lifeDicressSong_play
-        lifeDicressSong_play();
-    }
-
-    //check game over
-        if(lifeTime == 0){
-            console.log("game over")
-            //clear interval
-        clearInterval(rigthInterVal);
-        clearInterval(LeftInterVal);
-        clearInterval(BottomInterVal);
-        clearInterval(TopInterVal)
-
-        //UPDATE heigth score
-        let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
-        localStorage.setItem('heighScore', heightScore)
-
-            
-        //alrt box
-                Swal.fire({
-        title: `Game Over \n Your Scor is : ${currScor} \n heigh Score is : ${heightScore}`,
-        showDenyButton: true,
-        confirmButtonText: 'retry',
-        }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            window.location.reload();
-        } 
-        })
-         //gameOver Songs
-         GameOverSong_play();
-         background_SongPause();
-         back
-       
-        }
-
-}
-const moveBottom = ()=>{
-    SnakTopPosition += 10;
-    snak.style.top = SnakTopPosition+'px';
-
-    
-
-    let ansLeft = appleLeft - SnakLeftPosition;
-    let ansTop = appleTop - SnakTopPosition;
-    if(ansLeft<= 20 && ansLeft>= -20 && ansTop <=20 && ansTop >= -20){
-        ApplePositon();
-        currScor++;
-        currScoreID.innerHTML =currScor;
-        seepdIncessCount --;
-
-        //eat song play
-        eatSong_play();
-    }
-    
-    if(SnakTopPosition == 550){
-        SnakTopPosition = 70;
-        lifeTime--;
-        if(lifeTime <= 3){
-            lifeTimeID.style.color ='red';
-        }
-        lifeTimeID.innerHTML = lifeTime
-
-        //lifeDicressSong_play
-        lifeDicressSong_play();
-    }
-
-     //check game over
-     if(lifeTime == 0){
-        console.log("game over")
-        //clear interval
-        clearInterval(rigthInterVal);
-        clearInterval(LeftInterVal);
-        clearInterval(BottomInterVal);
-        clearInterval(TopInterVal)
-
-        //UPDATE heigth score
-        let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
-        localStorage.setItem('heighScore', heightScore)
-
-        
-        //alrt box
-                Swal.fire({
-        title: `Game Over \n Your Scor is : ${currScor} \n heigh Score is : ${heightScore}`,
-        showDenyButton: true,
-        confirmButtonText: 'retry',
-        }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            window.location.reload();
-        } 
-        })
-         
-         //gameOver Songs
-         GameOverSong_play();
-         background_SongPause();
-         back
-    }
-   
-}
-const moveTop = ()=>{
-    SnakTopPosition -= 10;
-    snak.style.top = SnakTopPosition+'px';
+    //lifeDicressSong_play
+    lifeDicressSong_play();
+ }
 
 
-    let ansLeft = appleLeft - SnakLeftPosition;
-    let ansTop = appleTop - SnakTopPosition;
-    if(ansLeft<= 20 && ansLeft>= -20 && ansTop <=20 && ansTop >= -20){
-        ApplePositon();
-        currScor++;
-        currScoreID.innerHTML = currScor;
-        seepdIncessCount --;
+ //cleare all interval and upadte heigth score
+  const cleare_intervel_heigth_score = (currScor)=>{
+    //clear interval
+    clearInterval(rigthInterVal);
+    clearInterval(LeftInterVal);
+    clearInterval(BottomInterVal);
+    clearInterval(TopInterVal)
 
-        //eat song play
-        eatSong_play();
-    }
+    //UPDATE heigth score
+    let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
+    localStorage.setItem('heighScore', heightScore)
 
-    if(SnakTopPosition < 70 ){
-        SnakTopPosition = 550;
-        lifeTime--;
-        if(lifeTime <= 3){
-            lifeTimeID.style.color ='red';
-        }
-        lifeTimeID.innerHTML = lifeTime
+  }
 
-        //lifeDicressSong_play
-        lifeDicressSong_play();
-    }
-
-     //check game over
-     if(lifeTime == 0){
-        console.log("game over")
-        //clear interval
-        clearInterval(rigthInterVal);
-        clearInterval(LeftInterVal);
-        clearInterval(BottomInterVal);
-        clearInterval(TopInterVal)
-
-        //UPDATE heigth score
-        let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
-        localStorage.setItem('heighScore', heightScore)
-
-        
-        //alrt box
-                Swal.fire({
-        title: `Game Over \n Your Scor is : ${currScor} \n heigh Score is : ${heightScore}`,
-        showDenyButton: true,
-        confirmButtonText: 'retry',
-        }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            window.location.reload();
-        } 
-        })
-
-         //gameOver Songs
-         GameOverSong_play();
-         background_SongPause();
-         back
-         
-    }
-
-}
-
-
-
-//apple postion
-let appleposition = 0;
-let appleLeft = 500;
-let appleTop = 600;
-
-const ApplePositon = ()=>{
-     appleLeft = Math.ceil(Math.random()*790);
-     appleTop = Math.ceil(Math.random()*490);
-
-     console.log(appleTop)
-
-
-    if(appleLeft < 120  || appleLeft > 895){
-        appleLeft = 150;
-    }
-
-    if(appleTop < 75 || appleTop > 525){
-        appleTop = 95
-    }
-
-
-    apple.style.left = appleLeft+"px";
-    apple.style.top = appleTop+"px";
-}
-
-//handle keyparess
-document.addEventListener('keydown' , (event)=>{
-    console.log(event.key)
-    if(event.key == "ArrowDown"){
-        startBottom();
-    }
-    if(event.key == "ArrowRight"){
-        startRigth();
-    }
-    if(event.key == "ArrowUp"){
-        startTop();
-    }
-    if(event.key == "ArrowLeft"){
-        startLeft();
-    }
-    if(event.key == "Enter"){
-        clearInterval(rigthInterVal);
-        clearInterval(LeftInterVal);
-        clearInterval(BottomInterVal);
-        clearInterval(TopInterVal)
-
-        //UPDATE heigth score
-        let heightScore = Math.max(localStorage.getItem('heighScore') , currScor);
-        localStorage.setItem('heighScore', heightScore)
-
-       //background song push
-        background_SongPause();
-        backgroundSong_count = 0;
-        
-    }
-
-})
-
-
-
-
-
-
-
-
+  //const incess snak speed
+   const incres_snak_speed = ()=>{
+    if(snakSpeed == 15){
+        snakSpeed = 15;
+       }else{
+           if(seepdIncessCount == 0){
+               snakSpeed -= 3;
+               seepdIncessCount = 5;
+           }
+       }
+   }
